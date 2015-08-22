@@ -1,7 +1,8 @@
 <?php namespace Iserter\Transunion;
 
+use Iserter\Transunion\Contracts\TransunionServiceInterface as TransunionInterface;
 
-class TransunionService {
+class TransunionService implements TransunionInterface {
 
     private $client;
 
@@ -10,11 +11,13 @@ class TransunionService {
         $this->client = new \SoapClient($apiURL);
     }
 
+    public function test(){
+        return self::class;
+    }
+
     public function getApiVersion(){
         return $this->client->Version();
     }
-
-
 
 
 }

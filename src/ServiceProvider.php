@@ -13,6 +13,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider{
         $configPath = __DIR__ . '/../config/transunion.php';
         $this->mergeConfigFrom($configPath, 'transunion');
 
+        //$this->app->bind('Transunion', 'Iserter\Transunion\TransunionService' );
+
         $this->app->singleton('Iserter\Transunion\Contracts\TransunionServiceInterface', function ($app) {
             return new TransunionService();
         });

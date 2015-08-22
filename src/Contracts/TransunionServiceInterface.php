@@ -1,5 +1,7 @@
 <?php namespace Iserter\Transunion\Contracts;
 
-class TransunionServiceInterface {
+interface TransunionServiceInterface {
+
+    public function getApiVersion();
 
 }
