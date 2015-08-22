@@ -1,0 +1,18 @@
+<?php
+
+
+$client = new SoapClient('https://service.mytransunion.co.za/IndirectTest/1/Indirect.svc?wsdl',array('soap_version' => SOAP_1_2, 'trace' => 1));
+
+ try {
+    $response = $client->__soapCall('Version',[]);
+    //$response = $client->Version();
+    return $response;
+} catch(Exception $e) {
+
+    var_dump($client->__getLastRequestHeaders());
+    var_dump($client->__getLastRequest());
+
+    var_dump($client->__getLastResponseHeaders());
+    var_dump($client->__getLastResponse());
+
+} 

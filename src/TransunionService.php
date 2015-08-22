@@ -4,19 +4,28 @@ use Iserter\Transunion\Contracts\TransunionServiceInterface as TransunionInterfa
 
 class TransunionService implements TransunionInterface {
 
-    private $client;
+    private $soapClient;
 
     public function __construct(){
         $apiURL = config('transunion.testing') ? config('transunion.api_test_url') : config('transunion.api_url');
-        $this->client = new \SoapClient($apiURL);
+        $this->soapClient = new \SoapClient($apiURL,array('soap_version' => SOAP_1_2));
+
+        $this->setSoapHeaders();
     }
 
-    public function test(){
-        return self::class;
+    public function getOperationList(){
+        return $this->soapClient->__getFunctions();
     }
 
     public function getApiVersion(){
-        return $this->client->Version();
+        return $this->soapClient->__soapCall('Version',[]);
+    }
+
+    private function setSoapHeaders()
+    {
+        $headers = [];
+        $headers[] = new \SoapHeader('http://www.w3.org/2005/08/addressing', 'Action', 'http://tempuri.org/IInDirect/Version');
+        $this->soapClient->__setSoapHeaders($headers);
     }
 
 
