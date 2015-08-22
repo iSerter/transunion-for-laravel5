@@ -1,13 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: ilyas
- * Date: 22.08.2015
- * Time: 04:40
- */
+<?php namespace Iserter\Transunion;
 
 
-class ServiceProvider extends Illuminate\Support\ServiceProvider{
+class ServiceProvider extends \Illuminate\Support\ServiceProvider{
 
     /**
      * Register the service provider.
@@ -16,6 +10,19 @@ class ServiceProvider extends Illuminate\Support\ServiceProvider{
      */
     public function register()
     {
-        // TODO: Implement register() method.
+        $configPath = __DIR__ . '/../config/transunion.php';
+        $this->mergeConfigFrom($configPath, 'transunion');
+
+        $this->app->singleton('Iserter\Transunion\Contracts\TransunionServiceInterface', function ($app) {
+            return new TransunionService();
+        });
+        
     }
+
+    public function boot(){
+        $configPath = __DIR__ . '/../config/transunion.php';
+        $this->publishes([$configPath => config_path('transunion.php')], 'config');
+    }
+
+
 }

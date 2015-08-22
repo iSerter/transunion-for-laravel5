@@ -11,10 +11,11 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "~5.0.17|5.1.*"
+
     },
     "autoload": {
         "psr-4": {
-            "Iserter\\TransUnion\\": "src/"
+            "Iserter\\Transunion\\": "src/"
         }
     }
 }
