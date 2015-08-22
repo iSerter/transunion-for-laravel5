@@ -1,5 +1,4 @@
-<?php
-
+<?php namespace Iserter\Transunion\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
